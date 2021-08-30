@@ -1,6 +1,6 @@
 # Website 
 
-[eClassroom](https://elclassroom.software)
+[eClassroom](https://eclassroom.software)
 
 
 # Getting Started with Create React App
