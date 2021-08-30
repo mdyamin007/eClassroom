@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 commands.txt
+ssl_cert.txt
 
