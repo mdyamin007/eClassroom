@@ -5,7 +5,7 @@ const SlideContainer = ({ slideDetails }) => {
   return (
     <>
       <a
-        href={`//${slideDetails.link}`}
+        href={slideDetails.link}
         rel="noopener noreferrer"
         target="_blank"
         className="text-decoration-none"
