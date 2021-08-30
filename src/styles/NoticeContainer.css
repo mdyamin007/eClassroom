@@ -1,0 +1,9 @@
+.card-notice {
+    background-color: #03254c;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.notice-text {
+    white-space: pre-wrap;
+}

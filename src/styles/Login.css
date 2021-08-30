@@ -1,0 +1,8 @@
+.login-button {
+    border-radius: 2rem;
+}
+
+.login-button:hover {
+    background-color: white;
+    color: #0d6efd !important;
+}

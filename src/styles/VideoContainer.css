@@ -1,0 +1,16 @@
+.card-video{
+    background-color: #03254c;
+    border: 2px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 450ms;
+}
+
+.card-video:hover {
+    transform: scale(1.03);
+    opacity: 1;
+    cursor: pointer;
+}

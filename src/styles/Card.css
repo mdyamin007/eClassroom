@@ -1,0 +1,30 @@
+body {
+    background-image: url("../images/background1.jpg");
+}
+
+.card-container {
+    width: 13rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #95dada;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
+    border-radius: 18px;
+  }
+  
+.card-container:hover {
+    transform: scale(1.05);
+}
+
+.card-image {
+    height: 180px;
+    width: 180px;
+}
+  
