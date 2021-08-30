@@ -39,7 +39,7 @@ const Signup = ({ history }) => {
       }
       setLoading(false);
     },
-    [history]
+    [store]
   );
 
   if (currentUser) {
