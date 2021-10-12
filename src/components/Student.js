@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import app from "../Firebase";
-import cookies from "../utils/cookies";
+import app from "../utils/Firebase";
 import StudentContainer from "./containers/StudentContainer";
 import { FaSearch } from "react-icons/fa";
 import "../styles/Student.css";
 import Navbar2 from "./Navbar2";
+import { useCookies } from "react-cookie";
+import SkeletonStudent from "../skeletons/SkeletonStudent";
 
 export default function Student() {
   const [allStudentList, setAllStudentList] = useState();
   const [studentList, setStudentList] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
@@ -26,7 +28,7 @@ export default function Student() {
 
   useEffect(() => {
     async function getData() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       await app
         .database()
         .ref(`Data/${ID}/userinfo`)
@@ -76,6 +78,7 @@ export default function Student() {
           studentList.map((val, index) => (
             <StudentContainer key={index} studentDetails={val} />
           ))}
+        {!studentList && [1, 2, 3].map((n) => <SkeletonStudent key={n} />)}
       </div>
     </>
   );

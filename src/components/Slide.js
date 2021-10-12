@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import app from "../Firebase";
-import cookies from "../utils/cookies";
+import { useCookies } from "react-cookie";
+import SkeletonVideoSlide from "../skeletons/SkeletonVideoSlide";
+import app from "../utils/Firebase";
 import SlideContainer from "./containers/SlideContainer";
 import Navbar2 from "./Navbar2";
 
@@ -8,6 +9,7 @@ export default function Slide() {
   const [subjectList, setSubjectList] = useState();
   const [allSlideList, setAllSlideList] = useState();
   const [slideList, setSlideList] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   const handleSelect = (e) => {
     const selectedValue = e.target.value;
@@ -23,7 +25,7 @@ export default function Slide() {
 
   useEffect(() => {
     async function getData() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       await app
         .database()
         .ref(`Data/${ID}/slide`)
@@ -50,8 +52,7 @@ export default function Slide() {
     getData();
   }, []);
 
-//   console.log(subjectList);
-
+  //   console.log(subjectList);
   return (
     <>
       <Navbar2 />
@@ -70,11 +71,12 @@ export default function Slide() {
             ))}
         </select>
       </div>
-      <div className="container" >
+      <div className="container">
         {slideList &&
           slideList.map((val, index) => (
             <SlideContainer key={index} slideDetails={val} />
           ))}
+        {!slideList && [1, 2, 3, 4].map((n) => <SkeletonVideoSlide key={n} />)}
       </div>
     </>
   );

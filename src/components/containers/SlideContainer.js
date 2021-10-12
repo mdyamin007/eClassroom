@@ -10,7 +10,7 @@ const SlideContainer = ({ slideDetails }) => {
         target="_blank"
         className="text-decoration-none"
       >
-        <div className="card-slide text-white p-3 m-3">
+        <div className="card-slide text-dark fw-bold p-3 m-3">
           <p>{slideDetails.slideName}</p>
           <p>{slideDetails.subjectName}</p>
           <p>{slideDetails.teacherName}</p>

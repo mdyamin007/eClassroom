@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import app from "../Firebase";
-import cookies from "../utils/cookies";
+import { useCookies } from "react-cookie";
+import SkeletonVideoSlide from "../skeletons/SkeletonVideoSlide";
+import app from "../utils/Firebase";
 import VideoContainer from "./containers/VideoContainer";
 import Navbar2 from "./Navbar2";
 
@@ -8,6 +9,7 @@ export default function Video() {
   const [subjectList, setSubjectList] = useState();
   const [allVideoList, setAllVideoList] = useState();
   const [videoList, setVideoList] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   const handleSelect = (e) => {
     const selectedValue = e.target.value;
@@ -23,7 +25,7 @@ export default function Video() {
 
   useEffect(() => {
     async function getData() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       await app
         .database()
         .ref(`Data/${ID}/video`)
@@ -70,11 +72,13 @@ export default function Video() {
             ))}
         </select>
       </div>
-      <div className="container" >
+      <div className="container">
         {videoList &&
           videoList.map((val, index) => (
             <VideoContainer key={index} videoDetails={val} />
           ))}
+
+        {!videoList && [1, 2, 3, 4].map((n) => <SkeletonVideoSlide key={n} />)}
       </div>
     </>
   );

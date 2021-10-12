@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import app from "../Firebase";
-import cookies from "../utils/cookies";
+import app from "../utils/Firebase";
 import TeacherContainer from "./containers/TeacherContainer";
 import { FaSearch } from "react-icons/fa";
 import Navbar2 from "./Navbar2";
+import { useCookies } from "react-cookie";
+import SkeletonTeacher from "../skeletons/SkeletonTeacher";
 
 export default function Teacher() {
   const [allTeacherList, setAllTeacherList] = useState();
   const [teacherList, setTeacherList] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
@@ -23,7 +25,7 @@ export default function Teacher() {
 
   useEffect(() => {
     async function getData() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       await app
         .database()
         .ref(`Data/${ID}/teacherdata`)
@@ -73,6 +75,7 @@ export default function Teacher() {
           teacherList.map((val, index) => (
             <TeacherContainer key={index} teacherDetails={val} />
           ))}
+        {!teacherList && [1, 2].map((n) => <SkeletonTeacher key={n} />)}
       </div>
     </>
   );

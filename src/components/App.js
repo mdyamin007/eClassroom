@@ -10,6 +10,7 @@ import Video from "./Video";
 import Slide from "./Slide";
 import Student from "./Student";
 import Teacher from "./Teacher";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <PrivateRoute path="/teacher" component={Teacher} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route component={PageNotFound} />
           </Switch>
         </Router>
       </AuthProvider>

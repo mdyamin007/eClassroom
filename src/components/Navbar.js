@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
-import app from "../Firebase";
+import app from "../utils/Firebase";
 import { signedOut } from "../store/auth";
 import { withRouter } from "react-router-dom";
 import { classConnected, classDisconnected } from "../store/class";
-import cookies from "../utils/cookies";
+import { useCookies } from "react-cookie";
 
 const Navbar = (props) => {
   const { store } = useContext(AuthContext);
   const [classID, setClassID] = useState();
+  const [cookies, setCookie, removeCookie] = useCookies(["class"]);
 
   useEffect(() => {
     async function getClassID() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       setClassID(ID);
       return ID;
     }
@@ -35,8 +36,9 @@ const Navbar = (props) => {
         } else {
           //Redux Operation
           store.dispatch(classConnected(classID));
-          cookies.set("class", classID, {
+          setCookie("class", classID, {
             path: "/",
+            expires: new Date(Date.now() + 1e11),
             secure: true,
             sameSite: "None",
           });
@@ -52,8 +54,8 @@ const Navbar = (props) => {
     app.auth().signOut();
     store.dispatch(signedOut());
     store.dispatch(classDisconnected());
-    cookies.remove("userType");
-    cookies.remove("class");
+    removeCookie("class");
+    removeCookie("userType");
   };
 
   return (

@@ -1,51 +1,58 @@
 import React, { useCallback, useContext } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
-import app from "../Firebase";
+import app from "../utils/Firebase";
 import "../styles/Login.css";
 import image from "../images/eclassroom.png";
 import { signedIn } from "../store/auth";
-import cookies from "../utils/cookies";
 import playImage from "../images/google_play.png";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const { currentUser, store } = useContext(AuthContext);
+  const [cookies, setCookie] = useCookies(["class"]);
 
-  const handleLogin = useCallback(async (event) => {
-    event.preventDefault();
-    const { email, password } = event.target.elements;
-    try {
-      await app.auth().signInWithEmailAndPassword(email.value, password.value);
-      await app
-        .database()
-        .ref("Users")
-        .orderByChild("email")
-        .equalTo(email.value)
-        .once("value")
-        .then((snapshot) => {
-          let obj = snapshot.val();
-          let data = obj[Object.keys(obj)[0]];
-          store.dispatch(signedIn(data.email, data.userType));
-          cookies.set("userType", data.userType, {
-            path: "/",
-            secure: true,
-            sameSite: "None",
+  const handleLogin = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await app
+          .auth()
+          .signInWithEmailAndPassword(email.value, password.value);
+        await app
+          .database()
+          .ref("Users")
+          .orderByChild("email")
+          .equalTo(email.value)
+          .once("value")
+          .then((snapshot) => {
+            let obj = snapshot.val();
+            let data = obj[Object.keys(obj)[0]];
+            store.dispatch(signedIn(data.email, data.userType));
+            setCookie("userType", data.userType, {
+              path: "/",
+              expires: new Date(Date.now() + 1e11),
+              secure: true,
+              sameSite: "None",
+            });
+          })
+          .catch((e) => {
+            alert(e);
           });
-        })
-        .catch((e) => {
-          alert(e);
-        });
-    } catch (error) {
-      alert(error);
-    }
-  }, [store]);
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [store]
+  );
 
   if (currentUser) {
     return <Redirect to="/" />;
   }
 
   return (
-    <>
+    <div className="login__container">
       <div className="container d-flex justify-content-center align-items-center text-white">
         <form onSubmit={handleLogin}>
           <div className="row">
@@ -84,12 +91,16 @@ const Login = () => {
               placeholder="******"
             />
           </div>
-          <button type="submit" className="btn btn-primary login-button">
+          <button type="submit" className="btn login-button">
             Login
           </button>
           <br />
           <br />
-          <Link className="text-danger" to="/signup">
+          <Link
+            style={{ fontSize: "20px", textDecoration: "None", color: "black" }}
+            className="fw-bold fst-italic"
+            to="/signup"
+          >
             If you're new, Register Here
           </Link>
           <div className="my-2 d-flex align-items-center justify-content-center">
@@ -107,7 +118,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import app from "../Firebase";
-import cookies from "../utils/cookies";
+import { useCookies } from "react-cookie";
+import SkeletonRoutine from "../skeletons/SkeletonRoutine";
+import app from "../utils/Firebase";
 import RoutineContainer from "./containers/RoutineContainer";
 import Days from "./Days";
 import Navbar2 from "./Navbar2";
@@ -8,10 +9,11 @@ import Navbar2 from "./Navbar2";
 const Routine = () => {
   const [classID, setClassID] = useState();
   const [routines, setRoutines] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   useEffect(() => {
     async function getClassID() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       setClassID(ID);
       return ID;
     }
@@ -26,14 +28,12 @@ const Routine = () => {
         .ref(`Data/${classID}/routine/${day}`)
         .once("value")
         .then((snapshot) => {
-          console.log(snapshot.val());
           const object = snapshot.val();
           let classList = [];
           for (const id in object) {
             classList.push(object[id]);
           }
           setRoutines(classList);
-          console.log(routines);
         });
     } else {
       alert("Class not connected!");
@@ -48,6 +48,7 @@ const Routine = () => {
           routines.map((classDetails, index) => (
             <RoutineContainer key={index} classDetails={classDetails} />
           ))}
+        {!routines && [1, 2].map((n) => <SkeletonRoutine key={n} />)}
       </div>
     </>
   );

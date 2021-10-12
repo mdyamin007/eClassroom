@@ -1,15 +1,15 @@
 import React, { useCallback, useContext, useState } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
-import app from "../Firebase";
+import app from "../utils/Firebase";
 import "../styles/Signup.css";
 import { AuthContext } from "../contexts/AuthProvider";
 import image from "../images/eclassroom.png";
 import { signedIn } from "../store/auth";
-import cookies from "../utils/cookies";
+import { useCookies } from "react-cookie";
 
 const Signup = ({ history }) => {
   const [loading, setLoading] = useState(false);
-
+  const [cookies, setCookie] = useCookies(["class"]);
   const { currentUser, store } = useContext(AuthContext);
 
   const handleSignUp = useCallback(
@@ -29,8 +29,9 @@ const Signup = ({ history }) => {
           userType: userType.value,
         });
         await store.dispatch(signedIn(email.value, userType.value));
-        cookies.set("userType", userType.value, {
+        setCookie("userType", userType.value, {
           path: "/",
+          expires: new Date(Date.now() + 1e11),
           secure: true,
           sameSite: "None",
         });

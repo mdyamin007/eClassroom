@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import cookies from "../utils/cookies";
-import app from "../Firebase";
+import { useCookies } from "react-cookie";
+import SkeletonNotice from "../skeletons/SkeletonNotice";
+import app from "../utils/Firebase";
 import NoticeContainer from "./containers/NoticeContainer";
 import Navbar2 from "./Navbar2";
 
 const Notice = () => {
   const [classID, setClassID] = useState();
   const [notices, setNotices] = useState();
+  const [cookies, setCookie] = useCookies(["class"]);
 
   useEffect(() => {
     async function getClassIDandNotices() {
-      const ID = await cookies.get("class");
+      const ID = await cookies.class;
       setClassID(ID);
       await app
         .database()
         .ref(`Data/${classID}/notice`)
         .once("value")
         .then((snapshot) => {
-          console.log(snapshot.val());
           const object = snapshot.val();
           let noticeList = [];
           for (const id in object) {
@@ -32,8 +33,6 @@ const Notice = () => {
     getClassIDandNotices();
   }, [classID]);
 
-  console.log(notices);
-
   return (
     <>
       <Navbar2 />
@@ -42,6 +41,7 @@ const Notice = () => {
           notices.map((notice, index) => (
             <NoticeContainer key={index} notice={notice} />
           ))}
+        {!notices && [1, 2, 3, 4].map((n) => <SkeletonNotice key={n} />)}
       </div>
     </>
   );
