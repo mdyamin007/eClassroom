@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: rgb(32, 211, 252);
   background: linear-gradient(
@@ -17,4 +23,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.btn-search {
+  border-top-right-radius: 1rem;
 }

@@ -1,16 +1,40 @@
 .card-slide {
-  background-color: white;
-  border: 2px solid black;
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.3)
+  );
+  backdrop-filter: blur(2rem);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: transform 450ms;
+  color: black;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
 }
 
 .card-slide:hover {
   transform: scale(1.03);
   opacity: 1;
   cursor: pointer;
+}
+
+.bookLogo__container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 10px 0px;
+  width: 75%;
+}
+
+.book__logo {
+  color: crimson;
+  height: 100px;
+  width: 100px;
 }

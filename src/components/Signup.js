@@ -48,10 +48,10 @@ const Signup = ({ history }) => {
   }
 
   return (
-    <>
-      <section className="form-signup text-center">
+    <section className="signup">
+      <div className="form-signup text-center">
         <img className="my-2" src={image} alt="logo" width="60px" />
-        <h1 className="h3 mb-5 fw-bold text-white">eClassroom</h1>
+        <h1 className="title h3 m -5 fw-bold">eClassroom</h1>
         <form onSubmit={handleSignUp}>
           <div className="form-floating mb-2">
             <input
@@ -94,8 +94,8 @@ const Signup = ({ history }) => {
             <label htmlFor="password">Password</label>
           </div>
           <select
-            className="form-select mb-3"
-            aria-label="Default select example"
+            className="form-select mb-3 fw-bold select"
+            aria-label="User Type"
             name="userType"
           >
             <option value="user">User</option>
@@ -108,13 +108,13 @@ const Signup = ({ history }) => {
             Sign up
           </button>
           <br /> <br />
-          <Link className="text-white" to="/login">
+          <Link className="link" to="/login">
             Already have account? Login Here.
           </Link>
           <p className="mt-5 mb-3 text-muted">&copy; DUET</p>
         </form>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

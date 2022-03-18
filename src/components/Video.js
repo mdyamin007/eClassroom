@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import SkeletonVideoSlide from "../skeletons/SkeletonVideoSlide";
+import SkeletonVideo from "../skeletons/SkeletonVideo";
 import app from "../utils/Firebase";
 import VideoContainer from "./containers/VideoContainer";
 import Navbar2 from "./Navbar2";
@@ -73,12 +73,15 @@ export default function Video() {
         </select>
       </div>
       <div className="container">
-        {videoList &&
-          videoList.map((val, index) => (
-            <VideoContainer key={index} videoDetails={val} />
-          ))}
+        <div className="row">
+          {videoList &&
+            videoList.map((val, index) => (
+              <VideoContainer key={index} videoDetails={val} />
+            ))}
 
-        {!videoList && [1, 2, 3, 4].map((n) => <SkeletonVideoSlide key={n} />)}
+          {!videoList &&
+            [1, 2, 3, 4, 5, 6, 7, 8].map((n) => <SkeletonVideo key={n} />)}
+        </div>
       </div>
     </>
   );

@@ -1,15 +1,24 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-button {
-  background: rgb(122, 117, 117) !important;
+  background: #426696;
+  opacity: 0.8;
   color: white;
   font-weight: bold;
-  transition: transform 450ms;
-  border-radius: 2rem;
+  transition: background 1s ease, color 1s ease;
+  border-top-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 
 .login-button:hover {
-  background-color: #568203;
-  color: white !important;
-  transform: scale(1.1);
+  background: whitesmoke;
+  color: black !important;
 }
 
 .img-play {
@@ -17,6 +26,113 @@
 }
 
 .login__container {
-  width: 100%;
-  height: 100vh;
+  width: 600px;
+  min-width: 200px;
+  position: relative;
+  z-index: 1;
+}
+
+.login__container > div {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  backdrop-filter: blur(2rem);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  color: #426696;
+  opacity: 0.8;
+}
+
+label {
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.link {
+  background: linear-gradient(
+    90deg,
+    rgba(32, 211, 252, 1) 0%,
+    rgba(110, 102, 249, 1) 100%
+  );
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  transition: color 1s ease;
+}
+
+.link:hover {
+  color: black;
+}
+
+input {
+  border-top-right-radius: 1rem !important;
+}
+
+.circle1,
+.circle2,
+.circle3,
+.circle4 {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 50% !important;
+  animation: animate 10s linear infinite;
+  animation-delay: calc(-1s * 4);
+}
+
+.circle1 {
+  position: absolute;
+  height: 10rem;
+  width: 10rem;
+  bottom: 140px;
+  left: -80px;
+  z-index: -1;
+}
+
+.circle3 {
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  right: -60px;
+  top: 50%;
+  z-index: -1;
+}
+
+.circle2 {
+  z-index: -2;
+  position: absolute;
+  height: 10rem;
+  width: 10rem;
+  top: -50px;
+  right: -60px;
+}
+
+.circle4 {
+  z-index: -4;
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  bottom: -20px;
+  left: 50%;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
 }

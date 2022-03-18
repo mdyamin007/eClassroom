@@ -1,0 +1,56 @@
+.square1,
+.square2,
+.square3,
+.square4 {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  );
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  animation: animate 10s linear infinite;
+}
+
+.square1 {
+  width: 5rem;
+  height: 5rem;
+  top: 40%;
+  left: 3%;
+  animation-delay: 1s;
+}
+
+.square2 {
+  width: 7rem;
+  height: 7rem;
+  top: 5%;
+  left: 30%;
+  animation-delay: 2s;
+}
+
+.square3 {
+  width: 5rem;
+  height: 5rem;
+  top: 40%;
+  right: 30%;
+  animation-delay: 3s;
+}
+
+.square4 {
+  width: 7rem;
+  height: 7rem;
+  bottom: 20%;
+  right: 3%;
+  animation-delay: 4s;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}

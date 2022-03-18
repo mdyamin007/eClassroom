@@ -3,8 +3,14 @@
   height: 15rem;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  border: 3px solid black;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  backdrop-filter: blur(2rem);
   border-radius: 5px;
   padding: 20px;
   cursor: pointer;
@@ -13,6 +19,8 @@
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
   border-radius: 18px;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 .card-container:hover {
@@ -22,4 +30,18 @@
 .card-image {
   height: 180px;
   width: 180px;
+}
+
+.card-container h5 {
+  background: rgb(32, 211, 252);
+  background: linear-gradient(
+    90deg,
+    rgba(32, 211, 252, 1) 0%,
+    rgba(110, 102, 249, 1) 100%
+  );
+  padding: 2px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  opacity: 0.8;
 }

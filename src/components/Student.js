@@ -65,7 +65,7 @@ export default function Student() {
                 placeholder="Search"
                 onChange={handleSearch}
               />
-              <button className="btn btn-primary">
+              <button className="btn btn-search btn-primary">
                 <FaSearch className="fa-search" />
               </button>
             </div>

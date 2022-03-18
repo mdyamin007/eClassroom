@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import SkeletonVideoSlide from "../skeletons/SkeletonVideoSlide";
+import SkeletonSlide from "../skeletons/SkeletonSlide";
 import app from "../utils/Firebase";
 import SlideContainer from "./containers/SlideContainer";
 import Navbar2 from "./Navbar2";
@@ -72,11 +72,14 @@ export default function Slide() {
         </select>
       </div>
       <div className="container">
-        {slideList &&
-          slideList.map((val, index) => (
-            <SlideContainer key={index} slideDetails={val} />
-          ))}
-        {!slideList && [1, 2, 3, 4].map((n) => <SkeletonVideoSlide key={n} />)}
+        <div className="row">
+          {slideList &&
+            slideList.map((val, index) => (
+              <SlideContainer key={index} slideDetails={val} />
+            ))}
+          {!slideList &&
+            [1, 2, 3, 4, 5, 6, 7, 8].map((n) => <SkeletonSlide key={n} />)}
+        </div>
       </div>
     </>
   );
